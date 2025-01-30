@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity() {
     fun queryLlama(prompt: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val request = LlamaRequest("llama2-13b", prompt)
+                val request = LlamaRequest("llama3", prompt)
                 val response = RetrofitClient.instance.generateResponse(request)
                 println("Llama Response: ${response.output}")
             } catch (e: Exception) {
