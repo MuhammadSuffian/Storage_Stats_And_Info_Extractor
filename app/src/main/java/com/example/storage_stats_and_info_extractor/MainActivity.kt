@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         return String.format("%.2f GB", gb)
     }
     fun getTotalImagesSize(contentResolver: ContentResolver) {
+        Log.e("PhoneClone","Getting Images")
         CoroutineScope(Dispatchers.IO).launch{
         val imageUri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
            val projection = arrayOf(MediaStore.Images.Media.DATA)
@@ -86,6 +87,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTotalDocumentsSize(contentResolver: ContentResolver) {
+        Log.e("PhoneClone","Getting Docs")
         CoroutineScope(Dispatchers.IO).launch {
             val uri: Uri = MediaStore.Files.getContentUri("external")
             val projection = arrayOf(MediaStore.Files.FileColumns.DATA)
@@ -115,6 +117,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun getTotalVideosSize(contentResolver: ContentResolver) {
+        Log.e("PhoneClone","Getting Videos")
         CoroutineScope(Dispatchers.IO).launch {
             val videoUri: Uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
             val projection = arrayOf(MediaStore.Video.Media.DATA)
@@ -142,6 +145,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun getTotalAudiosSize(contentResolver: ContentResolver) {
+        Log.e("PhoneClone","Getting Audios")
         CoroutineScope(Dispatchers.IO).launch {
             val audioUri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
             val projection = arrayOf(MediaStore.Audio.Media.DATA)
@@ -169,6 +173,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     fun getTotalApksSize(contentResolver: ContentResolver) {
+        Log.e("PhoneClone","Getting APKS")
         CoroutineScope(Dispatchers.IO).launch {
             val uri: Uri = MediaStore.Files.getContentUri("external")
             val projection = arrayOf(MediaStore.Files.FileColumns.DATA)
