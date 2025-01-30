@@ -29,7 +29,9 @@ class MainActivity : AppCompatActivity() {
 //        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
 //        intent.data = Uri.parse("package:$packageName")
 //        startActivity(intent)
-
+        binding.btnMsg.setOnClickListener(){
+            queryLlama("What is the capital of India?")
+        }
         binding.btnShow.setOnClickListener(){
             getStorageDetails()
             getTotalDocumentsSize(contentResolver)
@@ -219,6 +221,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+        }
+    }
+    fun queryLlama(prompt: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val request = LlamaRequest("llama2-13b", prompt)
+                val response = RetrofitClient.instance.generateResponse(request)
+                println("Llama Response: ${response.output}")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }
