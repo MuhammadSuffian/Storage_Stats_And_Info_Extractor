@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 //        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
 //        intent.data = Uri.parse("package:$packageName")
 //        startActivity(intent)
+
         binding.btnShow.setOnClickListener(){
             getStorageDetails()
             getTotalDocumentsSize(contentResolver)
@@ -196,6 +197,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             Log.e("PhoneClone", "Total APK's Size: ${formatSize(totalSize)}")
+        }
+    }
+    fun checkdel(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val projection = arrayOf(MediaStore.Files.FileColumns.DATA)
+            val selection = "${MediaStore.Files.FileColumns.DATA} LIKE ?"
+            val selectionArgs = arrayOf("%deleted_folder%")
+
+            val cursor = contentResolver.query(
+                MediaStore.Files.getContentUri("external"),
+                projection,
+                selection,
+                selectionArgs,
+                null
+            )
+            cursor?.use {
+                while (it.moveToNext()) {
+                    val filePath = it.getString(0)
+                    println("Recoverable file: $filePath")
+                }
+            }
+
         }
     }
 }
