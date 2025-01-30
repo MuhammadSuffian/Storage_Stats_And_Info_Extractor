@@ -201,28 +201,6 @@ class MainActivity : AppCompatActivity() {
             Log.e("PhoneClone", "Total APK's Size: ${formatSize(totalSize)}")
         }
     }
-    fun checkdel(){
-        CoroutineScope(Dispatchers.IO).launch {
-            val projection = arrayOf(MediaStore.Files.FileColumns.DATA)
-            val selection = "${MediaStore.Files.FileColumns.DATA} LIKE ?"
-            val selectionArgs = arrayOf("%deleted_folder%")
-
-            val cursor = contentResolver.query(
-                MediaStore.Files.getContentUri("external"),
-                projection,
-                selection,
-                selectionArgs,
-                null
-            )
-            cursor?.use {
-                while (it.moveToNext()) {
-                    val filePath = it.getString(0)
-                    println("Recoverable file: $filePath")
-                }
-            }
-
-        }
-    }
     fun queryLlama(prompt: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
